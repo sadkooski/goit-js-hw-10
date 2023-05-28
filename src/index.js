@@ -9,6 +9,28 @@ fetchBreeds();
 
 catSelect.addEventListener('change', catSelection);
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // API key: live_YzNJ606a2VcCgBF3J69KtewCDXMhWpvZo30t5cQDiNk6Fuej845NaRAfU2zvDojG
 
 // fetch('https://jsonplaceholder.typicode.com/users', {
