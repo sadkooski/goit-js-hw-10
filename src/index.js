@@ -1,35 +1,13 @@
 import { fetchBreeds } from './cat-api';
-import { fetchCatByBreed } from './cat-api';
+// import { fetchCatByBreed } from './cat-api';
 import { catSelection } from './cat-api';
 
 export const catSelect = document.querySelector('#breed-select');
-export const catDiv = document.querySelector('#cat-info')
+export const catDiv = document.querySelector('#cat-info');
 
 fetchBreeds();
 
 catSelect.addEventListener('change', catSelection);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // API key: live_YzNJ606a2VcCgBF3J69KtewCDXMhWpvZo30t5cQDiNk6Fuej845NaRAfU2zvDojG
 
