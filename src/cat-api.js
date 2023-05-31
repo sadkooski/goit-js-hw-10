@@ -1,13 +1,15 @@
 import { catSelect } from '.';
 import { catDiv } from '.';
+import { loader } from '.';
 export let catName;
 export let catDescription;
 export let catTemper;
 let catsArray = [];
 
+loader.classList.remove('display');
 export function fetchBreeds() {
   return new Promise((resolve, reject) => {
-    fetch('https://api.thecatapi.com/v1/breeds', {
+    fetch('https://api.thecatapi.com/v1/breedsdd', {
       method: 'GET',
       headers: {
         'x-api-key':
@@ -16,6 +18,8 @@ export function fetchBreeds() {
     })
       .then(response => {
         if (!response.ok) {
+          catSelect.classList.add('display');
+          error.classList.remove('display');
           reject(`Error code ${response.status}`);
         } else {
           return response.json();
@@ -23,6 +27,8 @@ export function fetchBreeds() {
       })
       .then(data => {
         resolve((catsArray = data));
+        loader.classList.add('display');
+        catSelect.classList.remove('display');
         console.log(catsArray);
         catsArray.forEach(cat => {
           const catOption = document.createElement('option');
@@ -60,6 +66,8 @@ export function fetchCatByBreed(breedId) {
       },
     })
       .then(response => {
+        loader.classList.remove('display');
+        catDiv.classList.add('display');
         if (!response.ok) {
           reject(`Error code ${response.status}`);
         } else {
@@ -68,6 +76,8 @@ export function fetchCatByBreed(breedId) {
       })
       .then(data => {
         resolve((catInfo = data));
+        loader.classList.add('display');
+        catDiv.classList.remove('display');
         console.log(catInfo);
         catDiv.innerHTML = `<img src="${catInfo['0'].url}" alt=""></img>
         <h1>${catName}</h1>
