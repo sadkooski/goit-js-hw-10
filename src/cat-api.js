@@ -1,15 +1,15 @@
 import { catSelect } from '.';
 import { catDiv } from '.';
 import { loader } from '.';
+import { error } from '.';
 export let catName;
 export let catDescription;
 export let catTemper;
 let catsArray = [];
 
-loader.classList.remove('display');
 export function fetchBreeds() {
   return new Promise((resolve, reject) => {
-    fetch('https://api.thecatapi.com/v1/breedsdd', {
+    fetch('https://api.thecatapi.com/v1/breeds', {
       method: 'GET',
       headers: {
         'x-api-key':
@@ -28,7 +28,7 @@ export function fetchBreeds() {
       .then(data => {
         resolve((catsArray = data));
         loader.classList.add('display');
-        catSelect.classList.remove('display');
+        // catSelect.classList.remove('display');
         console.log(catsArray);
         catsArray.forEach(cat => {
           const catOption = document.createElement('option');
@@ -69,6 +69,8 @@ export function fetchCatByBreed(breedId) {
         loader.classList.remove('display');
         catDiv.classList.add('display');
         if (!response.ok) {
+          catSelect.classList.add('display');
+          error.classList.remove('display');
           reject(`Error code ${response.status}`);
         } else {
           return response.json();
@@ -77,13 +79,12 @@ export function fetchCatByBreed(breedId) {
       .then(data => {
         resolve((catInfo = data));
         loader.classList.add('display');
-        catDiv.classList.remove('display');
         console.log(catInfo);
-        catDiv.innerHTML = `<img src="${catInfo['0'].url}" alt=""></img>
-        <h1>${catName}</h1>
-        <p>${catDescription}</p>
-        <p><b>Temperament:</b> ${catTemper}</p>
-        `;
+        catDiv.innerHTML = `<img id="img" src="${catInfo['0'].url}" alt="" height="400"></img>
+        <div class="text-container"><h2 class="text-display">${catName}</h2>
+        <p class="text-display">${catDescription}</p>
+        <p class="text-display"><b>Temperament:</b> ${catTemper}</p></div>`;
+        catDiv.classList.remove('display');
 
         // const htmlString = `<img src="" alt="">`;
       })
