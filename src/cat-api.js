@@ -2,9 +2,7 @@ import { catSelect } from '.';
 import { catDiv } from '.';
 import { loader } from '.';
 import { error } from '.';
-export let catName;
-export let catDescription;
-export let catTemper;
+
 let catsArray = [];
 
 export function fetchBreeds() {
